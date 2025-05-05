@@ -5,7 +5,7 @@ import { LotofacilResult } from './types/lotofacil';
 
 export default function Home() {
   const [resultado, setResultado] = useState<LotofacilResult | null>(null);
-  const [erro] = useState<string | null>(null);
+  const [erro, setErro] = useState<string | null>(null);
   const [dataAtualizacao, setDataAtualizacao] = useState<string>('');
 
   useEffect(() => {
@@ -20,6 +20,7 @@ export default function Home() {
         setDataAtualizacao(new Date().toLocaleTimeString('pt-BR'));
       } catch (err) {
         console.error('Erro ao buscar resultado da Lotofácil:', err);
+        setErro(err instanceof Error ? err.message : 'Erro desconhecido');
       }
     }
 
@@ -45,8 +46,23 @@ export default function Home() {
 
   if (!resultado) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-purple-700 text-xl">
-        Carregando resultados...
+      <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="mb-8">
+            <h1 className="text-4xl font-bold text-purple-800 mb-4">
+              Resultado Lotofácil
+            </h1>
+            <p className="text-gray-600">Carregando os resultados mais recentes...</p>
+          </div>
+          <div className="flex justify-center">
+            <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-purple-600"></div>
+          </div>
+          <div className="mt-8">
+            <p className="text-sm text-gray-500">
+              Aguarde enquanto buscamos os dados da Caixa Econômica Federal
+            </p>
+          </div>
+        </div>
       </div>
     );
   }
