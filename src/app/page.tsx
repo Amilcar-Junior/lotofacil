@@ -120,6 +120,9 @@ export default async function Home() {
           <div className="text-center text-red-600">
             <p className="text-xl mb-4">Não foi possível carregar os resultados no momento.</p>
             <p className="text-sm">Por favor, tente novamente mais tarde.</p>
+            {error instanceof Error && (
+              <p className="text-sm">Erro: {error.message}</p>
+            )}
           </div>
         </div>
       </div>
