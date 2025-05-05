@@ -109,7 +109,8 @@ export default async function Home() {
         </div>
       </div>
     );
-  } catch {
+  } catch (error) {
+    console.error('Erro ao buscar resultado da Lotofácil:', error);
     return (
       <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white py-8 px-4">
         <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8 border border-purple-100">
