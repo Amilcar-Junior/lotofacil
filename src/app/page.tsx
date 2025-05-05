@@ -1,7 +1,9 @@
 import { LotofacilResult } from './types/lotofacil';
 
 async function getLotofacilResult(): Promise<LotofacilResult> {
-  const response = await fetch('http://localhost:3000/api/lotofacil');
+  const response = await fetch('/api/lotofacil', {
+    next: { revalidate: 60 } // Revalida a cada 1 minuto
+  });
   if (!response.ok) {
     throw new Error('Não foi possível obter o resultado da Lotofácil');
   }
